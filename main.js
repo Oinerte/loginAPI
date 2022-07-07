@@ -1,12 +1,7 @@
-const express = require('express')
+import express  from 'express'
 const app = express()
-const bodyParser = require('body-parser')
-const mysql = require('mysql2');
-// bcrypt.genSalt(saltRounds, function(err, salt) {
-//     bcrypt.hash(myPlaintextPassword, salt, function(err, hash) {
-//     });
-// });
-// create the connection to database
+import bodyParser from 'body-parser';
+import mysql from 'mysql2'
 const connection = mysql.createConnection({
   host: 'us-cdbr-east-06.cleardb.net',
   user: 'bdcf72c5f7e878',
@@ -19,21 +14,19 @@ app.use(bodyParser.urlencoded({extended:false}))
 
 app.listen(8000, console.log('Server started...'))
 
-
-// simple query
-// connection.query(
-//     'SELECT * FROM `playlists`',
-//     function(err, results, fields) {
-//       console.log(results); // results contains rows returned by server
-//     }
-//   );
-
 app.get('/users', function (req, res){
     const body = req.body
     const inputUserName = body.inputUserName
     const registeredUsernames = []
     connection.query(
         'SELECT * FROM `user`',function (error, results){
+            res.send(results)
+        }
+    )
+})
+app.get('/users/5', function (req, res){
+    connection.query(
+        'SELECT * FROM `user` where pk_id = 5',function (error, results){
             res.send(results)
         }
     )
