@@ -24,6 +24,20 @@ app.get('/users', function (req, res){
         }
     )
 })
+app.post('/users/names', (req, res)=>{
+    let nameToTest = req.body.username
+    connection.query(
+        'SELECT username FROM `user`',function (error, results){
+            results.map((item)=>{
+                if(item.username == nameToTest){
+                    res.send('this name is been used')
+                }
+            })
+
+        }
+    )
+
+})
 app.get('/users/5', function (req, res){
     connection.query(
         'SELECT * FROM `user` where pk_id = 5',function (error, results){

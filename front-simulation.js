@@ -1,8 +1,9 @@
 import fetch from 'node-fetch';
 
-function getUSers(){
-    fetch('http://localhost:8000/users').then(response =>response.json().then(console.log)), {
-        method: 'GET',
+function getUSers(username){
+    fetch('http://localhost:8000/users'), {
+        method: 'POST',
+        body: {"username":`${username}`}
     }
 }
 function checkUsername(arr){
