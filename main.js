@@ -38,13 +38,6 @@ app.post('/users/names', (req, res)=>{
     )
 
 })
-app.get('/users/5', function (req, res){
-    connection.query(
-        'SELECT * FROM `user` where pk_id = 5',function (error, results){
-            res.send(results)
-        }
-    )
-})
 
 app.post('/users', (req, res) =>{
     const body = req.body
